@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SkyCast | Tableau de Bord Qualité de l'Air</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;family=Inter:wght@300..700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary-fixed-dim": "#d4cfff",
+              "tertiary-container": "#ffde65",
+              "surface-bright": "#172b54",
+              "secondary-container": "#1d0084",
+              "tertiary-dim": "#f0cf59",
+              "on-tertiary-fixed-variant": "#6b5800",
+              "surface-container": "#0c1934",
+              "inverse-surface": "#faf8ff",
+              "surface-variant": "#142449",
+              "primary": "#5bb1ff",
+              "on-secondary-fixed": "#3520b2",
+              "outline": "#65759e",
+              "tertiary": "#ffedb7",
+              "on-primary-fixed-variant": "#004877",
+              "surface-tint": "#5bb1ff",
+              "primary-container": "#44a3f5",
+              "on-surface-variant": "#9baad6",
+              "surface-container-high": "#101e3e",
+              "inverse-on-surface": "#4d556b",
+              "on-error": "#490006",
+              "on-surface": "#dee5ff",
+              "on-secondary": "#3621b3",
+              "tertiary-fixed": "#ffde65",
+              "on-tertiary-fixed": "#4a3c00",
+              "on-primary-fixed": "#002a48",
+              "inverse-primary": "#0063a0",
+              "on-tertiary": "#6a5700",
+              "surface-container-low": "#081329",
+              "error-container": "#8a1a1e",
+              "on-background": "#dee5ff",
+              "outline-variant": "#38476d",
+              "primary-fixed-dim": "#71b8ff",
+              "secondary-dim": "#6d60e9",
+              "error": "#ff716c",
+              "secondary": "#c5c0ff",
+              "surface": "#060e20",
+              "on-tertiary-container": "#604e00",
+              "primary-fixed": "#8fc5ff",
+              "on-primary-container": "#00223c",
+              "surface-container-highest": "#142449",
+              "secondary-fixed": "#e4dfff",
+              "error-dim": "#c94947",
+              "on-secondary-fixed-variant": "#5345ce",
+              "on-primary": "#002e4f",
+              "primary-dim": "#44a3f5",
+              "on-secondary-container": "#9f98ff",
+              "surface-dim": "#060e20",
+              "on-error-container": "#ff9993",
+              "background": "#060e20",
+              "tertiary-fixed-dim": "#f0cf59",
+              "surface-container-lowest": "#000000"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-card {
+        background: rgba(12, 25, 52, 0.6);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+      }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body min-h-screen selection:bg-primary/30">
+<!-- SideNavBar Component -->
+<aside class="flex flex-col h-full fixed left-0 top-0 h-screen w-64 border-r border-white/10 bg-slate-950/70 backdrop-blur-xl font-manrope tracking-tight shadow-[0_0_40px_rgba(33,150,243,0.06)] z-50">
+<div class="p-8">
+<h1 class="text-2xl font-black text-blue-400 tracking-tighter">SkyCast</h1>
+<p class="text-xs text-on-surface-variant font-medium tracking-widest uppercase mt-1">Atmospheric Hub</p>
+</div>
+<nav class="flex-1 px-4 space-y-2">
+<a class="flex items-center gap-4 px-4 py-3 text-slate-400 hover:text-white transition-colors hover:bg-white/5 transition-all duration-300 rounded-xl" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-medium">Tableau de bord</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-slate-400 hover:text-white transition-colors hover:bg-white/5 transition-all duration-300 rounded-xl" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-medium">Cartes</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-blue-400 font-bold border-r-2 border-blue-400 bg-blue-400/10 active:scale-95 transition-transform rounded-xl" href="#">
+<span class="material-symbols-outlined">air</span>
+<span class="font-medium">Qualité de l'air</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-slate-400 hover:text-white transition-colors hover:bg-white/5 transition-all duration-300 rounded-xl" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-medium">Historique</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-slate-400 hover:text-white transition-colors hover:bg-white/5 transition-all duration-300 rounded-xl" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-medium">Paramètres</span>
+</a>
+</nav>
+<div class="p-6 mt-auto">
+<div class="bg-surface-container-high p-4 rounded-2xl flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+<img alt="User profile picture" class="w-full h-full object-cover rounded-full" data-alt="close-up portrait of a professional man in high-tech setting with soft blue ambient lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-l9kUnThPdbPOYmMGS2R46q6iM-0bgPEnl_yH4BsuOM3cSlmPicsY_w6YvHQHU0CjvbtwtPZGdj2VhZfh25_j26X6YY78DtJN0BZY92kvRGfKebCZO0SqfYFLBGYYCJGrUyrc-W1SEqYNveWvEDmVjQmnHii3YVKTTe3YmVVel7F0a5E2o-OM-vGSGYySGzjmCogbSdFWiGv16SyJPT1rB3VYacdxER7C5LbD7FMeUT8PkMklOAKrew7QjRNNpqj90VfSwNKx-gpQ"/>
+</div>
+<div>
+<p class="text-sm font-bold text-on-surface">Jean Dupont</p>
+<p class="text-xs text-on-surface-variant">Admin Premium</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- TopAppBar Component -->
+<header class="flex justify-between items-center px-8 sticky top-0 z-40 ml-64 w-[calc(100%-16rem)] h-16 bg-slate-950/40 backdrop-blur-2xl border-b border-white/5 font-manrope">
+<div class="flex items-center flex-1 max-w-xl">
+<div class="relative w-full group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg">search</span>
+<input class="w-full bg-surface-container-highest/50 border-none rounded-full py-2 pl-12 pr-6 text-sm text-on-surface focus:ring-2 focus:ring-blue-500/20 transition-all" placeholder="Rechercher une ville..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center text-slate-400 hover:bg-white/10 rounded-full transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center text-slate-400 hover:bg-white/10 rounded-full transition-all">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-64 p-8 min-h-[calc(100vh-4rem)] bg-gradient-to-br from-surface to-surface-container-lowest">
+<div class="max-w-7xl mx-auto space-y-8">
+<!-- Page Hero Section -->
+<div class="flex flex-col md:flex-row justify-between items-end gap-6">
+<div>
+<h2 class="text-4xl font-headline font-extrabold tracking-tight text-white">Paris, France</h2>
+<p class="text-on-surface-variant font-medium">Mise à jour: Il y a 5 minutes • Ciel dégagé</p>
+</div>
+<div class="flex gap-2">
+<span class="px-4 py-2 bg-secondary-container text-on-secondary-container rounded-full text-sm font-bold tracking-tight">EN DIRECT</span>
+<span class="px-4 py-2 bg-surface-container-high text-on-surface-variant rounded-full text-sm font-medium">Historique 24h</span>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Main IQA Gauge Card -->
+<div class="lg:col-span-5 glass-card rounded-[2.5rem] p-8 flex flex-col items-center justify-center relative overflow-hidden group shadow-2xl">
+<div class="absolute -top-24 -right-24 w-64 h-64 bg-primary/10 rounded-full blur-[80px]"></div>
+<div class="absolute -bottom-24 -left-24 w-64 h-64 bg-tertiary/5 rounded-full blur-[80px]"></div>
+<h3 class="text-on-surface-variant font-headline font-bold text-lg mb-8 uppercase tracking-widest">Indice de Qualité de l'Air</h3>
+<!-- Circular Gauge -->
+<div class="relative w-64 h-64 flex items-center justify-center">
+<svg class="w-full h-full -rotate-90">
+<circle class="text-surface-container-highest" cx="128" cy="128" fill="transparent" r="110" stroke="currentColor" stroke-width="12"></circle>
+<circle class="text-tertiary-fixed drop-shadow-[0_0_12px_rgba(255,222,101,0.4)]" cx="128" cy="128" fill="transparent" r="110" stroke="currentColor" stroke-dasharray="690" stroke-dashoffset="310" stroke-width="12"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-7xl font-headline font-black text-white leading-none">68</span>
+<span class="text-tertiary font-bold tracking-[0.2em] mt-2">MODÉRÉ</span>
+</div>
+</div>
+<div class="mt-8 text-center max-w-xs">
+<p class="text-on-surface-variant text-sm leading-relaxed">La qualité de l'air est acceptable, mais peut présenter un risque pour les personnes sensibles.</p>
+</div>
+</div>
+<!-- Pollutants Grid -->
+<div class="lg:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-4">
+<!-- PM2.5 -->
+<div class="bg-surface-container-low rounded-3xl p-6 transition-all hover:bg-surface-container-high border border-white/5">
+<p class="text-on-surface-variant text-xs font-bold uppercase tracking-wider mb-2">PM2.5</p>
+<p class="text-2xl font-headline font-bold text-white">12.4 <span class="text-xs font-normal text-on-surface-variant">µg/m³</span></p>
+<div class="mt-4 h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-tertiary w-[40%]"></div>
+</div>
+</div>
+<!-- PM10 -->
+<div class="bg-surface-container-low rounded-3xl p-6 transition-all hover:bg-surface-container-high border border-white/5">
+<p class="text-on-surface-variant text-xs font-bold uppercase tracking-wider mb-2">PM10</p>
+<p class="text-2xl font-headline font-bold text-white">28.1 <span class="text-xs font-normal text-on-surface-variant">µg/m³</span></p>
+<div class="mt-4 h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[25%]"></div>
+</div>
+</div>
+<!-- O3 -->
+<div class="bg-surface-container-low rounded-3xl p-6 transition-all hover:bg-surface-container-high border border-white/5">
+<p class="text-on-surface-variant text-xs font-bold uppercase tracking-wider mb-2">O3 (Ozone)</p>
+<p class="text-2xl font-headline font-bold text-white">45.0 <span class="text-xs font-normal text-on-surface-variant">µg/m³</span></p>
+<div class="mt-4 h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-tertiary w-[55%]"></div>
+</div>
+</div>
+<!-- NO2 -->
+<div class="bg-surface-container-low rounded-3xl p-6 transition-all hover:bg-surface-container-high border border-white/5">
+<p class="text-on-surface-variant text-xs font-bold uppercase tracking-wider mb-2">NO2</p>
+<p class="text-2xl font-headline font-bold text-white">18.2 <span class="text-xs font-normal text-on-surface-variant">µg/m³</span></p>
+<div class="mt-4 h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[30%]"></div>
+</div>
+</div>
+<!-- SO2 -->
+<div class="bg-surface-container-low rounded-3xl p-6 transition-all hover:bg-surface-container-high border border-white/5">
+<p class="text-on-surface-variant text-xs font-bold uppercase tracking-wider mb-2">SO2</p>
+<p class="text-2xl font-headline font-bold text-white">2.5 <span class="text-xs font-normal text-on-surface-variant">µg/m³</span></p>
+<div class="mt-4 h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[10%]"></div>
+</div>
+</div>
+<!-- CO -->
+<div class="bg-surface-container-low rounded-3xl p-6 transition-all hover:bg-surface-container-high border border-white/5">
+<p class="text-on-surface-variant text-xs font-bold uppercase tracking-wider mb-2">CO</p>
+<p class="text-2xl font-headline font-bold text-white">340 <span class="text-xs font-normal text-on-surface-variant">µg/m³</span></p>
+<div class="mt-4 h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[15%]"></div>
+</div>
+</div>
+</div>
+<!-- Recommendations Section -->
+<div class="lg:col-span-12">
+<h3 class="text-2xl font-headline font-bold text-white mb-6">Recommandations Santé</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-surface-container rounded-3xl p-6 flex items-start gap-4 hover:bg-surface-container-high transition-colors">
+<div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-3xl">masks</span>
+</div>
+<div>
+<h4 class="font-bold text-white mb-1">Portez un masque</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">Recommandé pour les personnes sensibles lors de longs trajets.</p>
+</div>
+</div>
+<div class="bg-surface-container rounded-3xl p-6 flex items-start gap-4 hover:bg-surface-container-high transition-colors">
+<div class="w-12 h-12 rounded-2xl bg-tertiary/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-tertiary text-3xl">fitness_center</span>
+</div>
+<div>
+<h4 class="font-bold text-white mb-1">Activités physiques</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">Réduisez les exercices intenses en extérieur cet après-midi.</p>
+</div>
+</div>
+<div class="bg-surface-container rounded-3xl p-6 flex items-start gap-4 hover:bg-surface-container-high transition-colors">
+<div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-3xl">air</span>
+</div>
+<div>
+<h4 class="font-bold text-white mb-1">Aération</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">Privilégiez l'aération de votre domicile tôt le matin.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- 24h Forecast Chart Area -->
+<div class="lg:col-span-12 bg-surface-container-low rounded-[2.5rem] p-8 border border-white/5 relative overflow-hidden">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h3 class="text-xl font-headline font-bold text-white">Prévisions 24h</h3>
+<p class="text-sm text-on-surface-variant">Évolution de la pollution particulaire</p>
+</div>
+<div class="flex gap-4">
+<button class="px-4 py-2 rounded-full bg-surface-container-highest text-white text-xs font-bold tracking-widest uppercase transition-all hover:bg-primary hover:text-on-primary">Détails</button>
+</div>
+</div>
+<!-- Simplified Visual Chart -->
+<div class="relative h-64 flex items-end gap-1 px-2">
+<!-- Custom Gradient Background for Chart Area -->
+<div class="absolute inset-0 bg-gradient-to-t from-primary/5 via-transparent to-transparent"></div>
+<!-- Chart Bars -->
+<div class="flex-1 bg-primary/20 hover:bg-primary/40 rounded-t-lg h-[40%] transition-all cursor-pointer relative group">
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 bg-surface-container-highest px-2 py-1 rounded text-[10px] text-white transition-opacity">08h: 42</div>
+</div>
+<div class="flex-1 bg-primary/20 hover:bg-primary/40 rounded-t-lg h-[45%] transition-all cursor-pointer"></div>
+<div class="flex-1 bg-primary/20 hover:bg-primary/40 rounded-t-lg h-[50%] transition-all cursor-pointer"></div>
+<div class="flex-1 bg-primary/20 hover:bg-primary/40 rounded-t-lg h-[60%] transition-all cursor-pointer"></div>
+<div class="flex-1 bg-tertiary/20 hover:bg-tertiary/40 rounded-t-lg h-[75%] transition-all cursor-pointer"></div>
+<div class="flex-1 bg-tertiary/20 hover:bg-tertiary/40 rounded-t-lg h-[80%] transition-all cursor-pointer"></div>
+<div class="flex-1 bg-tertiary/20 hover:bg-tertiary/40 rounded-t-lg h-[85%] transition-all cursor-pointer"></div>
+<div class="flex-1 bg-tertiary/20 hover:bg-tertiary/40 rounded-t-lg h-[82%] transition-all cursor-pointer"></div>
+<div class="flex-1 bg-tertiary/20 hover:bg-tertiary/40 rounded-t-lg h-[70%] transition-all cursor-pointer"></div>
+<div class="flex-1 bg-primary/20 hover:bg-primary/40 rounded-t-lg h-[55%] transition-all cursor-pointer"></div>
+<div class="flex-1 bg-primary/20 hover:bg-primary/40 rounded-t-lg h-[40%] transition-all cursor-pointer"></div>
+<div class="flex-1 bg-primary/20 hover:bg-primary/40 rounded-t-lg h-[30%] transition-all cursor-pointer"></div>
+<div class="flex-1 bg-primary/20 hover:bg-primary/40 rounded-t-lg h-[25%] transition-all cursor-pointer"></div>
+<div class="flex-1 bg-primary/20 hover:bg-primary/40 rounded-t-lg h-[20%] transition-all cursor-pointer"></div>
+<div class="flex-1 bg-primary/20 hover:bg-primary/40 rounded-t-lg h-[30%] transition-all cursor-pointer"></div>
+<div class="flex-1 bg-primary/20 hover:bg-primary/40 rounded-t-lg h-[35%] transition-all cursor-pointer"></div>
+<div class="flex-1 bg-primary/20 hover:bg-primary/40 rounded-t-lg h-[40%] transition-all cursor-pointer"></div>
+<div class="flex-1 bg-primary/20 hover:bg-primary/40 rounded-t-lg h-[50%] transition-all cursor-pointer"></div>
+<div class="flex-1 bg-primary/20 hover:bg-primary/40 rounded-t-lg h-[65%] transition-all cursor-pointer"></div>
+<div class="flex-1 bg-primary/20 hover:bg-primary/40 rounded-t-lg h-[55%] transition-all cursor-pointer"></div>
+<div class="flex-1 bg-primary/20 hover:bg-primary/40 rounded-t-lg h-[45%] transition-all cursor-pointer"></div>
+<div class="flex-1 bg-primary/20 hover:bg-primary/40 rounded-t-lg h-[40%] transition-all cursor-pointer"></div>
+<div class="flex-1 bg-primary/20 hover:bg-primary/40 rounded-t-lg h-[35%] transition-all cursor-pointer"></div>
+<div class="flex-1 bg-primary/20 hover:bg-primary/40 rounded-t-lg h-[30%] transition-all cursor-pointer"></div>
+</div>
+<!-- Chart Labels -->
+<div class="flex justify-between mt-4 text-[10px] text-on-surface-variant font-bold uppercase tracking-widest px-2">
+<span>00:00</span>
+<span>06:00</span>
+<span>12:00</span>
+<span>18:00</span>
+<span>23:59</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Background Decorative Elements -->
+<div class="fixed top-0 left-0 w-full h-full pointer-events-none -z-10 overflow-hidden">
+<div class="absolute top-[10%] right-[5%] w-[40rem] h-[40rem] bg-primary/5 rounded-full blur-[120px]"></div>
+<div class="absolute bottom-[20%] left-[10%] w-[30rem] h-[30rem] bg-secondary-container/10 rounded-full blur-[100px]"></div>
+<div class="absolute top-[40%] left-[40%] w-[20rem] h-[20rem] bg-tertiary-container/5 rounded-full blur-[80px]"></div>
+</div>
+</body></html>

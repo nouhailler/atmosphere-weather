@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary-container": "#1d0084",
+              "primary": "#5bb1ff",
+              "surface-tint": "#5bb1ff",
+              "surface-container-lowest": "#000000",
+              "on-tertiary-container": "#604e00",
+              "on-tertiary-fixed": "#4a3c00",
+              "on-surface-variant": "#9baad6",
+              "on-secondary": "#3621b3",
+              "on-surface": "#dee5ff",
+              "surface-dim": "#060e20",
+              "primary-fixed": "#8fc5ff",
+              "primary-dim": "#44a3f5",
+              "inverse-surface": "#faf8ff",
+              "primary-container": "#44a3f5",
+              "on-secondary-container": "#9f98ff",
+              "on-tertiary": "#6a5700",
+              "outline": "#65759e",
+              "background": "#060e20",
+              "on-tertiary-fixed-variant": "#6b5800",
+              "tertiary-fixed-dim": "#f0cf59",
+              "inverse-on-surface": "#4d556b",
+              "surface-container-high": "#101e3e",
+              "surface-container-low": "#081329",
+              "secondary-fixed": "#e4dfff",
+              "error-dim": "#c94947",
+              "surface-variant": "#142449",
+              "tertiary-dim": "#f0cf59",
+              "on-secondary-fixed": "#3520b2",
+              "surface-container": "#0c1934",
+              "on-primary-fixed": "#002a48",
+              "on-primary-container": "#00223c",
+              "on-error": "#490006",
+              "surface-bright": "#172b54",
+              "secondary-fixed-dim": "#d4cfff",
+              "on-primary": "#002e4f",
+              "error-container": "#8a1a1e",
+              "secondary-dim": "#6d60e9",
+              "primary-fixed-dim": "#71b8ff",
+              "tertiary-container": "#ffde65",
+              "on-secondary-fixed-variant": "#5345ce",
+              "on-error-container": "#ff9993",
+              "tertiary-fixed": "#ffde65",
+              "on-primary-fixed-variant": "#004877",
+              "on-background": "#dee5ff",
+              "error": "#ff716c",
+              "outline-variant": "#38476d",
+              "surface": "#060e20",
+              "tertiary": "#ffedb7",
+              "inverse-primary": "#0063a0",
+              "surface-container-highest": "#142449",
+              "secondary": "#c5c0ff"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(20, 36, 73, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary/30">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#060e20]/70 backdrop-blur-2xl shadow-[0_20px_40px_-15px_rgba(91,177,255,0.06)]">
+<div class="flex justify-between items-center h-20 px-8 w-full font-manrope antialiased tracking-tight">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-black tracking-tighter text-white uppercase">MétéoPrécise</span>
+<div class="hidden md:flex items-center bg-surface-container-highest/50 px-4 py-2 rounded-xl">
+<span class="material-symbols-outlined text-slate-400 mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm text-on-surface placeholder-slate-500 w-64" placeholder="Rechercher une ville..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-blue-400/10 hover:backdrop-blur-md rounded-xl transition-all active:scale-95 duration-200 ease-out">
+<span class="material-symbols-outlined text-slate-400" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 hover:bg-blue-400/10 hover:backdrop-blur-md rounded-xl transition-all active:scale-95 duration-200 ease-out">
+<span class="material-symbols-outlined text-slate-400" data-icon="help">help</span>
+</button>
+<div class="h-10 w-10 rounded-full overflow-hidden border-2 border-primary/20">
+<img alt="Account circle" class="w-full h-full object-cover" data-alt="portrait photo of a middle aged man with professional friendly expression for user profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiqiRfL3SQ87WZlj98B6If3gSkI6VzbhEhVdDxnc_vCRtg1zkJG-gNInhzAKg6nIRZ0M0yIdEWeMo9EqNoXofsrRDmdtaEdcFRs2nqZUoyykwBTYNxoFBTv1oEyEYM5zrHmvmbPFzazNDyjby-J9VW9AE_DnKjQ6yhbsdb6PpGyzA38BrajYN-8xsTNJZsa880YfwJCgpj8r56xNdiRWvslMb-PZ89ul4dhMCCy0K-hjuf4IImwFv7creLPgTj4Vk3fzhD_MymcTTA"/>
+</div>
+</div>
+</div>
+<div class="bg-gradient-to-b from-[#060e20] to-transparent h-px w-full opacity-10"></div>
+</nav>
+<div class="flex">
+<!-- SideNavBar -->
+<aside class="h-screen w-72 flex flex-col fixed left-0 top-0 pt-24 pb-8 bg-[#060e20] z-40 hidden md:flex">
+<div class="px-8 mb-6">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="cloud">cloud</span>
+</div>
+<div>
+<h3 class="text-lg font-bold text-white leading-tight">Atmosphère</h3>
+<p class="text-xs text-blue-400 uppercase tracking-widest font-bold">Édition Premium</p>
+</div>
+</div>
+</div>
+<nav class="flex flex-col h-full gap-2 font-manrope font-medium text-sm">
+<a class="flex items-center gap-4 text-slate-500 hover:text-slate-200 py-4 px-8 transition-all hover:bg-white/5" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                    Tableau de bord
+                </a>
+<a class="flex items-center gap-4 text-slate-500 hover:text-slate-200 py-4 px-8 transition-all hover:bg-white/5" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+                    Historique
+                </a>
+<a class="flex items-center gap-4 bg-blue-500/10 text-blue-400 rounded-r-full py-4 px-8 border-l-4 border-blue-400 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                    Paramètres
+                </a>
+<a class="flex items-center gap-4 text-slate-500 hover:text-slate-200 py-4 px-8 transition-all hover:bg-white/5" href="#">
+<span class="material-symbols-outlined" data-icon="warning">warning</span>
+                    Alertes
+                </a>
+<div class="mt-auto px-8">
+<div class="bg-surface-container-highest/30 rounded-2xl p-4 mb-4">
+<p class="text-xs text-on-surface-variant mb-2">Besoin de plus ?</p>
+<button class="w-full py-2 bg-primary text-on-primary-container rounded-xl font-bold text-xs uppercase tracking-wider transition-transform active:scale-95">
+                            Mettre à jour
+                        </button>
+</div>
+<div class="bg-slate-800/30 w-full h-[1px] my-4"></div>
+<a class="flex items-center gap-4 text-slate-500 hover:text-error py-4 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                        Déconnexion
+                    </a>
+</div>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-0 md:ml-72 pt-32 pb-20 px-4 md:px-12 max-w-7xl mx-auto w-full">
+<header class="mb-12">
+<h1 class="text-5xl font-extrabold font-headline tracking-tighter text-white mb-2">Paramètres</h1>
+<p class="text-on-surface-variant text-lg">Gérez votre compte et vos préférences atmosphériques.</p>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Section: Profil de l'utilisateur -->
+<div class="lg:col-span-8 space-y-8">
+<section class="glass-card rounded-[2rem] p-8">
+<div class="flex flex-col md:flex-row items-center gap-8">
+<div class="relative group">
+<div class="w-32 h-32 rounded-full overflow-hidden border-4 border-primary/30">
+<img alt="Photo de profil utilisateur" class="w-full h-full object-cover" data-alt="high quality portrait of Jean Dupont, professional man, clean background, modern photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBI1J-XmFR1WcbkyhIEr5O_xWaZ-kYzv4Jq46CfxI80ccZslczhT9uVjotnJw2jADHgm8rHMWoATsN2qgdt4k0DyggGhumwjTQ7noL91FrOWqhyIazuD9mUQagi6oG6YRSo0DHLPbPssSWPJgpSrmjdRpL3lC4VaOSOt9KRIyFutxk0hXd1a8c7uiLD_wjZxSDn_Kbv-Hw_GT_psIsEZOo8yZ_YnFw869uxgRht2v6KMgS_Q3hkcfJNKP8ZvR4aCVyX3czda09vMuxd"/>
+</div>
+<button class="absolute bottom-0 right-0 bg-primary text-on-primary-container p-2 rounded-full shadow-lg scale-90 hover:scale-100 transition-transform">
+<span class="material-symbols-outlined text-sm">photo_camera</span>
+</button>
+</div>
+<div class="flex-1 text-center md:text-left">
+<h2 class="text-2xl font-bold font-headline text-white mb-1">Jean Dupont</h2>
+<p class="text-on-surface-variant mb-4">jean.dupont@email.fr</p>
+<button class="px-6 py-2.5 bg-surface-container-highest text-primary font-semibold rounded-xl hover:bg-primary/10 transition-colors border border-primary/20">
+                                    Editer le profil
+                                </button>
+</div>
+</div>
+</section>
+<!-- Section: Notifications -->
+<section class="glass-card rounded-[2rem] p-8">
+<div class="flex items-center gap-4 mb-8">
+<span class="material-symbols-outlined text-primary p-2 bg-primary/10 rounded-lg">notifications_active</span>
+<h2 class="text-xl font-bold font-headline text-white">Notifications</h2>
+</div>
+<div class="space-y-6">
+<!-- Toggle Item 1 -->
+<div class="flex items-center justify-between p-4 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors">
+<div>
+<h3 class="font-semibold text-on-surface">Alertes météo graves</h3>
+<p class="text-sm text-on-surface-variant">Recevez des alertes immédiates en cas de phénomènes extrêmes.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-14 h-7 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-1 after:left-1 after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Toggle Item 2 -->
+<div class="flex items-center justify-between p-4 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors">
+<div>
+<h3 class="font-semibold text-on-surface">Prévisions quotidiennes</h3>
+<p class="text-sm text-on-surface-variant">Un résumé météo chaque matin à 8h00.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-14 h-7 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-1 after:left-1 after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Toggle Item 3 -->
+<div class="flex items-center justify-between p-4 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors">
+<div>
+<h3 class="font-semibold text-on-surface">Qualité de l'air</h3>
+<p class="text-sm text-on-surface-variant">Alertes lorsque l'indice de pollution dépasse le seuil modéré.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-14 h-7 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-1 after:left-1 after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Preferences & Account -->
+<div class="lg:col-span-4 space-y-8">
+<!-- Section: Préférences -->
+<section class="glass-card rounded-[2rem] p-8">
+<div class="flex items-center gap-4 mb-8">
+<span class="material-symbols-outlined text-primary p-2 bg-primary/10 rounded-lg">tune</span>
+<h2 class="text-xl font-bold font-headline text-white">Préférences</h2>
+</div>
+<div class="space-y-8">
+<div>
+<label class="block text-sm font-medium text-on-surface-variant mb-4">Unités de température</label>
+<div class="flex bg-surface-container-highest rounded-xl p-1">
+<button class="flex-1 py-2 px-4 rounded-lg bg-primary text-on-primary-container font-bold text-sm transition-all">Celsius (°C)</button>
+<button class="flex-1 py-2 px-4 rounded-lg text-on-surface-variant hover:text-on-surface font-medium text-sm transition-all">Fahrenheit (°F)</button>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-on-surface-variant mb-4">Langue de l'application</label>
+<div class="relative">
+<select class="w-full bg-surface-container-highest border-none rounded-xl py-3 px-4 text-on-surface appearance-none focus:ring-2 focus:ring-primary/50">
+<option selected="">Français</option>
+<option>English</option>
+<option>Deutsch</option>
+<option>Español</option>
+</select>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+<span class="material-symbols-outlined text-on-surface-variant">expand_more</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Compte -->
+<section class="glass-card rounded-[2rem] p-8">
+<div class="flex items-center gap-4 mb-8">
+<span class="material-symbols-outlined text-primary p-2 bg-primary/10 rounded-lg">lock</span>
+<h2 class="text-xl font-bold font-headline text-white">Compte</h2>
+</div>
+<div class="space-y-4">
+<button class="w-full text-left p-4 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors flex items-center justify-between group">
+<span class="font-medium">Changer le mot de passe</span>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:translate-x-1 transition-transform">chevron_right</span>
+</button>
+<div class="pt-4 mt-4 border-t border-white/5">
+<button class="w-full p-4 rounded-2xl bg-error/10 hover:bg-error/20 text-error font-bold transition-colors flex items-center gap-3">
+<span class="material-symbols-outlined">logout</span>
+                                    Déconnexion
+                                </button>
+<p class="text-[10px] text-center mt-4 text-on-surface-variant/50 uppercase tracking-widest font-bold">Atmosphère v2.4.0-Stable</p>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="w-full py-8 mt-auto border-t border-blue-900/30">
+<div class="flex justify-between items-center px-12 max-w-7xl mx-auto font-inter text-xs text-slate-500">
+<p>© 2024 MétéoPrécise. Données atmosphériques en temps réel.</p>
+<div class="flex gap-6">
+<a class="text-slate-500 hover:text-blue-300 transition-colors" href="#">Confidentialité</a>
+<a class="text-slate-500 hover:text-blue-300 transition-colors" href="#">Conditions</a>
+<a class="text-slate-500 hover:text-blue-300 transition-colors" href="#">Support</a>
+</div>
+</div>
+</footer>
+<!-- Responsive Bottom Navigation (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full glass-card border-t-0 py-3 px-6 z-50 flex justify-between items-center">
+<button class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-[10px]">Dashboard</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="text-[10px]">Historique</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="text-[10px] font-bold">Paramètres</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined" data-icon="warning">warning</span>
+<span class="text-[10px]">Alertes</span>
+</button>
+</nav>
+</body></html>
