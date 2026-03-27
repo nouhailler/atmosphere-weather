@@ -24,16 +24,16 @@ Application météo desktop construite avec **Vite + React**, design exporté de
 
 ### Depuis les sources
 
-\`\`\`bash
+```bash
 cd app
 npm install
 npm run dev
 # → http://localhost:5173
-\`\`\`
+```
 
 ### Depuis le paquet Debian (.deb)
 
-\`\`\`bash
+```bash
 # Téléchargez le fichier .deb depuis la release
 sudo dpkg -i atmosphere-weather_1.1.0_all.deb
 sudo apt install -f
@@ -42,7 +42,7 @@ atmosphere-weather
 ```
 
 L'application démarre un serveur local sur le port 8080 et ouvre automatiquement votre navigateur.
-```
+
 
 ---
 
