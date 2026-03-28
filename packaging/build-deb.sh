@@ -1,17 +1,13 @@
 #!/usr/bin/env bash
 # ─────────────────────────────────────────────────────────────────────────────
-# build-deb.sh — Packaging Debian pour Atmosphere (Electron + Vite/React)
-#
-# Prérequis :
-#   sudo apt install nodejs npm
-#   (electron-builder s'installe via npm, pas besoin de l'installer globalement)
+# build-deb.sh — Packaging Debian pour Meteor Weather (Electron + Vite/React)
 #
 # Usage :
 #   cd /home/patrick/claude-workspace/meteor
 #   bash packaging/build-deb.sh
 #
 # Résultat :
-#   release/atmosphere_1.0.0_amd64.deb
+#   release/meteor-weather_1.2.0_amd64.deb
 # ─────────────────────────────────────────────────────────────────────────────
 set -euo pipefail
 
@@ -21,8 +17,12 @@ APP_DIR="$ROOT_DIR/app"
 ELECTRON_DIR="$ROOT_DIR/electron-wrapper"
 RELEASE_DIR="$ROOT_DIR/release"
 
+APP_NAME="meteor-weather"
+APP_VERSION="1.2.0"
+GH_REPO="https://github.com/nouhailler/meteor"   # repo GitHub cible
+
 echo "═══════════════════════════════════════════"
-echo "  Atmosphere — Build .deb"
+echo "  Meteor Weather — Build .deb v${APP_VERSION}"
 echo "═══════════════════════════════════════════"
 
 # ── 1. Build Vite ─────────────────────────────────────────────────────────────
@@ -38,80 +38,76 @@ echo ""
 echo "▶ [2/4] Préparation du wrapper Electron..."
 mkdir -p "$ELECTRON_DIR"
 
-# Copier le build Vite dans le wrapper
 rm -rf "$ELECTRON_DIR/dist"
 cp -r "$APP_DIR/dist" "$ELECTRON_DIR/dist"
 
-# Créer le main Electron s'il n'existe pas
 cat > "$ELECTRON_DIR/main.js" << 'ELECTRON_MAIN'
 const { app, BrowserWindow } = require('electron')
 const path = require('path')
 
 function createWindow() {
   const win = new BrowserWindow({
-    width: 1400,
+    width: 1440,
     height: 900,
     minWidth: 1100,
     minHeight: 700,
-    title: 'Atmosphere',
+    title: 'Meteor',
     backgroundColor: '#060e20',
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
     },
-    // Pas de frame native sur Linux — optionnel
-    // frame: false,
   })
-
   win.loadFile(path.join(__dirname, 'dist', 'index.html'))
-
-  // Ouvrir DevTools en mode dev seulement
-  if (process.env.NODE_ENV === 'development') {
-    win.webContents.openDevTools()
-  }
 }
 
 app.whenReady().then(createWindow)
-
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') app.quit()
-})
-
-app.on('activate', () => {
-  if (BrowserWindow.getAllWindows().length === 0) createWindow()
-})
+app.on('window-all-closed', () => { if (process.platform !== 'darwin') app.quit() })
+app.on('activate', () => { if (BrowserWindow.getAllWindows().length === 0) createWindow() })
 ELECTRON_MAIN
 
 echo "   ✓ main.js Electron créé"
 
-# Créer le package.json du wrapper Electron
-cat > "$ELECTRON_DIR/package.json" << 'ELECTRON_PKG'
+# package.json avec tous les champs requis par electron-builder pour .deb
+cat > "$ELECTRON_DIR/package.json" << ELECTRON_PKG
 {
-  "name": "atmosphere-weather",
-  "version": "1.0.0",
-  "description": "Tableau de bord météo Atmosphere",
+  "name": "${APP_NAME}",
+  "version": "${APP_VERSION}",
+  "description": "Meteor — Tableau de bord météo open source",
+  "homepage": "${GH_REPO}",
   "main": "main.js",
-  "author": "Patrick Favre",
+  "author": {
+    "name": "Patrick Favre",
+    "email": "patrick@meteor-weather.local"
+  },
   "license": "MIT",
   "scripts": {
     "start": "electron .",
     "dist": "electron-builder --linux deb"
   },
   "build": {
-    "appId": "ch.atmosphere.weather",
-    "productName": "Atmosphere",
-    "directories": {
-      "output": "../release"
-    },
+    "appId": "ch.meteor.weather",
+    "productName": "Meteor",
+    "directories": { "output": "../release" },
     "linux": {
       "target": "deb",
       "category": "Utility",
       "icon": "assets/icon.png",
       "synopsis": "Tableau de bord météo local",
-      "description": "Application météo Atmosphere — Tableau de bord interactif avec données en temps réel."
+      "description": "Meteor — Application météo open source. Données Open-Meteo, Leaflet, Chart.js. Sans compte, sans clé API.",
+      "maintainer": "Patrick Favre <patrick@meteor-weather.local>"
     },
     "deb": {
-      "depends": ["libgtk-3-0", "libnotify4", "libnss3", "libxss1", "libxtst6", "xdg-utils", "libatspi2.0-0", "libuuid1"]
+      "depends": [
+        "libgtk-3-0",
+        "libnotify4",
+        "libnss3",
+        "libxss1",
+        "libxtst6",
+        "xdg-utils",
+        "libatspi2.0-0",
+        "libuuid1"
+      ]
     }
   },
   "devDependencies": {
@@ -123,12 +119,11 @@ ELECTRON_PKG
 
 echo "   ✓ package.json Electron créé"
 
-# Créer une icône par défaut si elle n'existe pas
+# Icône par défaut si absente
 mkdir -p "$ELECTRON_DIR/assets"
 if [ ! -f "$ELECTRON_DIR/assets/icon.png" ]; then
-  # Générer une icône SVG → PNG avec Inkscape si disponible, sinon avertissement
   if command -v inkscape &>/dev/null; then
-    cat > /tmp/atmosphere-icon.svg << 'SVG_ICON'
+    cat > /tmp/meteor-icon.svg << 'SVG_ICON'
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
   <rect width="512" height="512" rx="100" fill="#060e20"/>
   <circle cx="256" cy="220" r="90" fill="none" stroke="#5bb1ff" stroke-width="20"/>
@@ -136,12 +131,10 @@ if [ ! -f "$ELECTRON_DIR/assets/icon.png" ]; then
   <path d="M110 370 Q256 420 402 370" stroke="#44a3f5" stroke-width="14" fill="none" stroke-linecap="round"/>
 </svg>
 SVG_ICON
-    inkscape /tmp/atmosphere-icon.svg --export-png="$ELECTRON_DIR/assets/icon.png" --export-width=512 2>/dev/null || true
+    inkscape /tmp/meteor-icon.svg --export-png="$ELECTRON_DIR/assets/icon.png" --export-width=512 2>/dev/null || true
   fi
-  if [ ! -f "$ELECTRON_DIR/assets/icon.png" ]; then
-    echo "   ⚠  Pas d'icône générée (inkscape absent) — electron-builder utilisera une icône par défaut"
-    echo "      → Déposez une image 512×512px dans electron-wrapper/assets/icon.png pour personnaliser"
-  fi
+  [ ! -f "$ELECTRON_DIR/assets/icon.png" ] && \
+    echo "   ⚠  Icône manquante — electron-builder utilisera l'icône par défaut"
 fi
 
 # ── 3. Installer les dépendances Electron ─────────────────────────────────────
@@ -156,6 +149,7 @@ echo ""
 echo "▶ [4/4] Build du paquet .deb..."
 mkdir -p "$RELEASE_DIR"
 npm run dist -- --publish=never
+
 echo ""
 echo "═══════════════════════════════════════════"
 echo "  ✓ Paquet .deb généré dans : release/"
@@ -163,5 +157,5 @@ ls -lh "$RELEASE_DIR"/*.deb 2>/dev/null || echo "  (vérifier le dossier release
 echo "═══════════════════════════════════════════"
 echo ""
 echo "  Pour installer :"
-echo "  sudo dpkg -i release/atmosphere-weather_1.0.0_amd64.deb"
+echo "  sudo dpkg -i release/${APP_NAME}_${APP_VERSION}_amd64.deb"
 echo ""

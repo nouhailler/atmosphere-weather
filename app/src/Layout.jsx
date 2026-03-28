@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { t, shared } from "./tokens.js";
 import SearchBar from "./SearchBar.jsx";
+import HelpPanel from "./HelpPanel.jsx";
 
 export function Icon({ name, size=24, style={}, filled=false }) {
   return (
@@ -20,6 +22,8 @@ const NAV_ITEMS = [
 ];
 
 export default function Layout({ page, onNavigate, children }) {
+  const [helpOpen, setHelpOpen] = useState(false);
+
   return (
     <div style={{ display:"flex", minHeight:"100vh", backgroundColor:t.background, color:t.onBackground, fontFamily:"'Inter','Manrope',sans-serif", position:"relative" }}>
       <div style={{ position:"fixed", top:"-30%", left:"15%", width:"60vw", height:"60vw", borderRadius:"50%", background:"radial-gradient(circle,rgba(91,177,255,0.05) 0%,transparent 70%)", pointerEvents:"none", zIndex:0 }} />
@@ -40,20 +44,32 @@ export default function Layout({ page, onNavigate, children }) {
           ))}
         </nav>
         <div style={{ marginTop:"auto", padding:"12px 16px", fontSize:11, color:t.onSurfaceVariant, textAlign:"center" }}>
-          Meteor v1.1 · Open-Meteo · OSM
+          Meteor v1.2.0 · Open-Meteo · OSM
         </div>
       </aside>
 
       <main style={shared.main}>
         <header style={shared.header}>
           <SearchBar />
-          <div style={shared.headerActions}>
-            <button style={shared.iconBtn}><Icon name="notifications" size={22}/></button>
-            <div style={shared.avatar}>PF</div>
-          </div>
+          <button
+            onClick={() => setHelpOpen(h => !h)}
+            title="Aide et documentation"
+            style={{
+              width:36, height:36,
+              display:"flex", alignItems:"center", justifyContent:"center",
+              borderRadius:"50%",
+              backgroundColor: helpOpen ? `${t.primary}20` : "rgba(255,255,255,0.05)",
+              border: helpOpen ? `1px solid ${t.primary}44` : "1px solid rgba(255,255,255,0.08)",
+              color: helpOpen ? t.primary : t.onSurfaceVariant,
+              cursor:"pointer", transition:"all 0.15s",
+              fontSize:15, fontWeight:700, fontFamily:"'Manrope',sans-serif",
+            }}
+          >?</button>
         </header>
         {children}
       </main>
+
+      {helpOpen && <HelpPanel page={page} onClose={() => setHelpOpen(false)}/>}
     </div>
   );
 }

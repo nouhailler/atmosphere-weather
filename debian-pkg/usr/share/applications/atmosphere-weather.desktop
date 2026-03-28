@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Atmosphere Weather
+Comment=Tableau de bord météo
+Exec=atmosphere-weather
+Icon=atmosphere-weather
+Terminal=false
+Type=Application
+Categories=Utility;Weather;
+Keywords=weather;meteo;forecast;

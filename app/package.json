@@ -1,7 +1,7 @@
 {
   "name": "meteor-weather",
-  "version": "1.1.0",
-  "description": "Meteor — Application météo locale open source",
+  "version": "1.2.0",
+  "description": "Meteor Weather — Tableau de bord météo open source",
   "private": true,
   "type": "module",
   "scripts": {

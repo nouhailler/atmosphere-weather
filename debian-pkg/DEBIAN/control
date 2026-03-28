@@ -1,0 +1,10 @@
+Package: atmosphere-weather
+Version: 1.1.0
+Section: utils
+Priority: optional
+Architecture: all
+Maintainer: Patrick Favre <patrick@atmosphere.local>
+Description: Tableau de bord météo React avec données Open-Meteo
+ Application météo avec prévisions, qualité de l'air, historique,
+ graphiques et recherche de villes.
+Depends: python3, xdg-utils

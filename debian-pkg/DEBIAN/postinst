@@ -1,0 +1,7 @@
+#!/bin/bash
+set -e
+# Mettre à jour le cache des applications
+if command -v update-desktop-database >/dev/null; then
+    update-desktop-database
+fi
+exit 0
