@@ -7,6 +7,8 @@
 
 Application météo desktop **100% open source**, construite avec **React + Vite**, sans compte utilisateur, sans clé API, sans télémétrie. Toutes les données proviennent de services gratuits et conformes RGPD.
 
+![Dashboard](stitch_export/screenshots/tableau_de_bord_météo_nav.png)
+
 ---
 
 ## ✨ Fonctionnalités
